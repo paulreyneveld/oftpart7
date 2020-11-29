@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {
   BrowserRouter as Router,
-  Switch, Route, Link, useParams
+  Switch, Route, Link, useParams, useHistory
 } from 'react-router-dom'
 
 const Menu = () => {
@@ -69,6 +69,8 @@ const CreateNew = (props) => {
   const [info, setInfo] = useState('')
 
 
+  const history = useHistory()
+
   const handleSubmit = (e) => {
     e.preventDefault()
     props.addNew({
@@ -77,6 +79,10 @@ const CreateNew = (props) => {
       info,
       votes: 0
     })
+
+    history.push('/')
+    props.notifyWith(`Success: ${content}`)
+
   }
 
   return (
@@ -99,7 +105,15 @@ const CreateNew = (props) => {
       </form>
     </div>
   )
+}
 
+const Notification = ({ message }) => {
+  if (!message) {
+    return null
+  }
+  return (
+    <div>{message}</div>
+  )
 }
 
 const App = () => {
@@ -119,8 +133,18 @@ const App = () => {
       id: '2'
     }
   ])
+  const [message, setMessage] = useState(null)
 
-  const [notification, setNotification] = useState('')
+  const notifyWith = (message) => {
+    setMessage(
+      message
+    )
+
+    setTimeout(() => {
+      setMessage(null)
+    }, 3000)
+  }
+
 
   const addNew = (anecdote) => {
     anecdote.id = (Math.random() * 10000).toFixed(0)
@@ -148,12 +172,13 @@ const App = () => {
       <Switch>
         <Route exact path="/">
           <Menu />
+          <Notification message={message} />
           <AnecdoteList anecdotes={anecdotes} />
           <Footer />
         </Route>
         <Route path="/create">
           <Menu />
-          <CreateNew addNew={addNew} />
+          <CreateNew addNew={addNew} notifyWith={notifyWith} />
           <Footer />  
         </Route>
         <Route path="/about">
