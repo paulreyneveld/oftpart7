@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useField } from './hooks'
 import {
   BrowserRouter as Router,
   Switch, Route, Link, useParams, useHistory
@@ -21,7 +22,7 @@ const AnecdoteList = ({ anecdotes }) => (
   <div>
     <h2>Anecdotes</h2>
     <ul>
-      {anecdotes.map(anecdote => <Link to={`/anecdotes/${anecdote.id}`}><li key={anecdote.id} >{anecdote.content}</li></Link>)}
+      {anecdotes.map(anecdote => <Link key={anecdote.id} to={`/anecdotes/${anecdote.id}`}><li key={anecdote.id} >{anecdote.content}</li></Link>)}
     </ul>
   </div>
 )
@@ -64,7 +65,7 @@ const Footer = () => (
 )
 
 const CreateNew = (props) => {
-  const [content, setContent] = useState('')
+  // const [content, setContent] = useState('')
   const [author, setAuthor] = useState('')
   const [info, setInfo] = useState('')
 
@@ -85,13 +86,22 @@ const CreateNew = (props) => {
 
   }
 
+  const val1 = useField("text")
+  console.log(val1.type)
+  console.log(val1.value)
+  console.log(typeof val1)
+  console.log(typeof author)
+  console.log(typeof info)
+
+  let content = val1.value
+
   return (
     <div>
       <h2>create a new anecdote</h2>
       <form onSubmit={handleSubmit}>
         <div>
           content
-          <input name='content' value={content} onChange={(e) => setContent(e.target.value)} />
+          <input name={val1.type} value={val1.value} onChange={val1.onChange} />
         </div>
         <div>
           author
