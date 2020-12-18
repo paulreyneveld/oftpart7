@@ -86,6 +86,8 @@ const CreateNew = (props) => {
 
   }
 
+  // The example doesn't clarify the issue related to string versus object use. I am going to revisit this.
+  
   const val1 = useField("text")
   console.log(val1.type)
   console.log(val1.value)
