@@ -66,8 +66,8 @@ const Footer = () => (
 
 const CreateNew = (props) => {
   // const [content, setContent] = useState('')
-  const [author, setAuthor] = useState('')
-  const [info, setInfo] = useState('')
+  // const [author, setAuthor] = useState('')
+  // const [info, setInfo] = useState('')
 
 
   const history = useHistory()
@@ -87,15 +87,19 @@ const CreateNew = (props) => {
   }
 
   // The example doesn't clarify the issue related to string versus object use. I am going to revisit this.
-  
-  const val1 = useField("text")
-  console.log(val1.type)
-  console.log(val1.value)
-  console.log(typeof val1)
-  console.log(typeof author)
-  console.log(typeof info)
 
-  let content = val1.value
+  const contentObj = useField("text")
+  // console.log(val1.type)
+  // console.log(val1.value)
+  // console.log(typeof val1)
+  // console.log(typeof author)
+  // console.log(typeof info)
+  const authorObj = useField("text")
+  const infoObj = useField("text")
+
+  const content = contentObj.value
+  const author = authorObj.value
+  const info = infoObj.value
 
   return (
     <div>
@@ -103,15 +107,15 @@ const CreateNew = (props) => {
       <form onSubmit={handleSubmit}>
         <div>
           content
-          <input name={val1.type} value={val1.value} onChange={val1.onChange} />
+          <input { ...contentObj }/>
         </div>
         <div>
           author
-          <input name='author' value={author} onChange={(e) => setAuthor(e.target.value)} />
+          <input name={authorObj.type} value={authorObj.value} onChange={authorObj.onChange} />
         </div>
         <div>
           url for more info
-          <input name='info' value={info} onChange={(e)=> setInfo(e.target.value)} />
+          <input name={infoObj.type} value={infoObj.value} onChange={infoObj.onChange} />
         </div>
         <button>create</button>
       </form>
