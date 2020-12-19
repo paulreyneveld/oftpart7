@@ -86,14 +86,7 @@ const CreateNew = (props) => {
 
   }
 
-  // The example doesn't clarify the issue related to string versus object use. I am going to revisit this.
-
   const contentObj = useField("text")
-  // console.log(val1.type)
-  // console.log(val1.value)
-  // console.log(typeof val1)
-  // console.log(typeof author)
-  // console.log(typeof info)
   const authorObj = useField("text")
   const infoObj = useField("text")
 
@@ -101,6 +94,12 @@ const CreateNew = (props) => {
   const author = authorObj.value
   const info = infoObj.value
 
+  const clearForm = (e) => {
+    e.preventDefault()
+    contentObj.reset()
+    authorObj.reset()
+    infoObj.reset()
+  }
   return (
     <div>
       <h2>create a new anecdote</h2>
@@ -118,6 +117,8 @@ const CreateNew = (props) => {
           <input { ...infoObj } />
         </div>
         <button>create</button>
+        <button onClick={clearForm}>reset</button>
+
       </form>
     </div>
   )
