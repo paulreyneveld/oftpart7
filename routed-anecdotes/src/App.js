@@ -111,11 +111,11 @@ const CreateNew = (props) => {
         </div>
         <div>
           author
-          <input name={authorObj.type} value={authorObj.value} onChange={authorObj.onChange} />
+          <input { ...authorObj }/>
         </div>
         <div>
           url for more info
-          <input name={infoObj.type} value={infoObj.value} onChange={infoObj.onChange} />
+          <input { ...infoObj } />
         </div>
         <button>create</button>
       </form>
