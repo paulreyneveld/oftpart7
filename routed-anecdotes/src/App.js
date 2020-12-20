@@ -86,9 +86,17 @@ const CreateNew = (props) => {
 
   }
 
-  const contentObj = useField("text")
+  // const contentObj = useField("text")
+  const contentHook = useField("text")
   const authorObj = useField("text")
   const infoObj = useField("text")
+  const testHook = useField("text")
+  console.log(typeof testHook)
+  const { a, ...testObj } = testHook
+  // console.log(testObj)
+
+  const { reset, ...contentObj } = contentHook
+
 
   const content = contentObj.value
   const author = authorObj.value
@@ -96,7 +104,7 @@ const CreateNew = (props) => {
 
   const clearForm = (e) => {
     e.preventDefault()
-    contentObj.reset()
+    contentHook.reset()
     authorObj.reset()
     infoObj.reset()
   }
