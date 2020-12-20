@@ -100,6 +100,7 @@ const CreateNew = (props) => {
     authorObj.reset()
     infoObj.reset()
   }
+
   return (
     <div>
       <h2>create a new anecdote</h2>
@@ -118,7 +119,6 @@ const CreateNew = (props) => {
         </div>
         <button>create</button>
         <button onClick={clearForm}>reset</button>
-
       </form>
     </div>
   )
