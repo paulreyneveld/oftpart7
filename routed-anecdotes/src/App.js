@@ -105,22 +105,22 @@ const CreateNew = (props) => {
 
   const test = filterProperties(contentObj)
   console.log(test)
-  
+
   return (
     <div>
       <h2>create a new anecdote</h2>
       <form onSubmit={handleSubmit}>
         <div>
           content
-          <input { ...contentObj }/>
+          <input { ...filterProperties(contentObj) }/>
         </div>
         <div>
           author
-          <input { ...authorObj }/>
+          <input { ...filterProperties(authorObj) }/>
         </div>
         <div>
           url for more info
-          <input { ...infoObj } />
+          <input { ...filterProperties(infoObj) } />
         </div>
         <button>create</button>
         <button onClick={clearForm}>reset</button>
