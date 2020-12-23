@@ -103,9 +103,6 @@ const CreateNew = (props) => {
 
   const filterProperties = ({reset, ...rest}) => rest
 
-  const test = filterProperties(contentObj)
-  console.log(test)
-
   return (
     <div>
       <h2>create a new anecdote</h2>
