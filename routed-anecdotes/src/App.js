@@ -86,17 +86,9 @@ const CreateNew = (props) => {
 
   }
 
-  // const contentObj = useField("text")
-  const contentHook = useField("text")
+  const contentObj = useField("text")
   const authorObj = useField("text")
   const infoObj = useField("text")
-  const testHook = useField("text")
-  console.log(typeof testHook)
-  const { a, ...testObj } = testHook
-  // console.log(testObj)
-
-  const { reset, ...contentObj } = contentHook
-
 
   const content = contentObj.value
   const author = authorObj.value
@@ -104,11 +96,16 @@ const CreateNew = (props) => {
 
   const clearForm = (e) => {
     e.preventDefault()
-    contentHook.reset()
+    contentObj.reset()
     authorObj.reset()
     infoObj.reset()
   }
 
+  const filterProperties = ({reset, ...rest}) => rest
+
+  const test = filterProperties(contentObj)
+  console.log(test)
+  
   return (
     <div>
       <h2>create a new anecdote</h2>
