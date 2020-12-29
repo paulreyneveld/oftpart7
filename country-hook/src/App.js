@@ -29,7 +29,7 @@ const useCountry = (name) => {
 }
 
 const Country = ({ country }) => {
-  console.log(country)
+
   if (!country) {
     return null
   }
@@ -54,7 +54,7 @@ const Country = ({ country }) => {
 
 const App = () => {
   const nameInput = useField('text')
-  const [name, setName] = useState('')
+  const [name, setName] = useState(null)
   const country = useCountry(name)
 
   const fetch = (e) => {
