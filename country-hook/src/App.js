@@ -15,17 +15,6 @@ const useField = (type) => {
   }
 }
 
-// const useCountry = (name) => {
-//   const [country, setCountry] = useState(null)
-//   useEffect(() => {
-//     if (name) {
-//       axios.get(`https://restcountries.eu/rest/v2/name/${name}?fullText=true`)
-//         .t)
-
-//   console.log(country)
-//   return country
-// }
-
 const useCountry = (name) => {
   const [country, setCountry] = useState(null)
   const [status, setStatus] = useState('idle')
@@ -40,7 +29,11 @@ const useCountry = (name) => {
           setCountry(response)
           setStatus('fetched')
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+          console.log(error)
+          setStatus('failed')
+          setCountry({found: false})
+        })
     }
     getData()
 
@@ -52,7 +45,7 @@ const useCountry = (name) => {
     return country
   }
 
-  return null
+  return country
 }
 
 const Country = ({ country }) => {
@@ -68,6 +61,7 @@ const Country = ({ country }) => {
       </div>
     )
   }
+
   console.log(country)
   return (
     <div>
