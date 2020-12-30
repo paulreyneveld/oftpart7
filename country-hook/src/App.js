@@ -28,20 +28,31 @@ const useField = (type) => {
 
 const useCountry = (name) => {
   const [country, setCountry] = useState(null)
+  const [status, setStatus] = useState('idle')
   
   useEffect(() => {
-    if (!name) return 
+    if (!name) return
 
     const getData = () => {
+      setStatus('fetching')
       axios.get(`https://restcountries.eu/rest/v2/name/${name}?fullText=true`)
-        .then(response => setCountry(response))
+        .then(response => {
+          setCountry(response)
+          setStatus('fetched')
+        })
         .catch(error => console.log(error))
     }
     getData()
 
   }, [name])
-  
-  return country
+
+  if (status === 'fetched') {
+    country.found = true
+    return country
+  }
+  else {
+    return country
+  }
 }
 
 const Country = ({ country }) => {
