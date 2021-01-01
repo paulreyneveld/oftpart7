@@ -1,1 +1,1 @@
-This repo contains answers for OFS exercises 7.1 - 7.7.
+This repo contains answers for OFS exercises 7.1 - 7.8.
