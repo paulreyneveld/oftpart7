@@ -20,7 +20,12 @@ const useField = (type) => {
 const useResource = (baseUrl) => {
   const [resources, setResources] = useState([])
 
-  // ...
+  // The getAll is going to be handled by an axios get with and a resource set
+
+  useEffect(() => {
+    axios.get(baseUrl)
+      .then(response => setResources(response.data))
+  }, [baseUrl])
 
   const create = (resource) => {
     // ...
