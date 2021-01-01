@@ -20,7 +20,7 @@ const useField = (type) => {
 const useResource = (baseUrl) => {
   const [resources, setResources] = useState([])
 
-  // The getAll is going to be handled by an axios get with and a resource set
+  let token = null
 
   useEffect(() => {
     axios.get(baseUrl)
@@ -28,7 +28,15 @@ const useResource = (baseUrl) => {
   }, [baseUrl])
 
   const create = (resource) => {
-    // ...
+    const config = {
+      header: { Authorization: token },
+    }
+
+    axios.post(baseUrl, resource, config)
+    axios.get(baseUrl)
+      .then(response => 
+        setResources(response.data)
+      )
   }
 
   const service = {
