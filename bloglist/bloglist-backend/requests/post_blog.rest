@@ -1,0 +1,11 @@
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhb2xvdiIsImlkIjoiNWZhNzBjYzk2YjY2MDZjNzExNDM5ZDFhIiwiaWF0IjoxNjA0NzgzMzQzfQ.EtNxt-fnWjuzX_D4nGa-S2WPCCvr1XtxJ0uNNpUKGIk
+
+{
+    "title": "Some good ideas: A treatise", 
+    "author": "Pablo V.",
+    "likes": 99,
+    "url": "http://treatise.com",
+    "userId": "5faf100309d84435a505888e"
+}
