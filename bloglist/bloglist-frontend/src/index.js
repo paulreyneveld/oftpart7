@@ -1,15 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
-import { applyMiddleware, createStore } from 'redux'
+import { applyMiddleware, createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 // Need to import a reducer here. 
+
 import notificationReducer from './reducers/notificationReducer'
+import blogReducer from './reducers/blogReducer'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
+const reducer = combineReducers({
+    notification: notificationReducer,
+    blogs: blogReducer
+})
+
 const store = createStore(
-    notificationReducer,
+    reducer,
     composeWithDevTools(
         applyMiddleware(thunk)
     )

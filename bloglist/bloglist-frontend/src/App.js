@@ -12,6 +12,7 @@ const App = () => {
 
   const dispatch = useDispatch()
   
+  // Manage blogs with redux
   const [blogs, setBlogs] = useState([])
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -73,6 +74,7 @@ const App = () => {
     blogFormRef.current.toggleVisibility()
     let response = await blogService.create(newBlog)
     newBlog.id = response.id
+    // Mange with redux
     setBlogs(blogs.concat(newBlog))
     dispatch(setNotification({
         message: `a new blog '${newBlog.title}' by ${newBlog.author} added!`,
@@ -81,12 +83,14 @@ const App = () => {
   }
 
   const deleteBlog = async ( id ) => {
+    // Manage with redux
     setBlogs(blogs.filter(blog => blog.id !== id))
     await blogService.removeBlog(id)
   }
 
   const updateBlogLikes = async ( newBlog ) => {
     await blogService.updateLikes(newBlog)
+    // Manage with redux
     setBlogs(blogs.map(blog => 
       blog.id === newBlog.id  
       ? {...blog, likes : newBlog.likes} 
