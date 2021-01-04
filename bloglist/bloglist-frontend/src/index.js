@@ -4,9 +4,9 @@ import App from './App'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 // Need to import a reducer here. 
-import dummyReducer from './reducers/dummyReducer'
+import notificationReducer from './reducers/notificationReducer'
 
-const store = createStore(dummyReducer)
+const store = createStore(notificationReducer)
 
 ReactDOM.render(
     <Provider store={store}>
