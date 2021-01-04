@@ -5,14 +5,18 @@ import loginService from './services/login'
 import BlogForm from './components/BlogForm'
 import Togglable from './components/Togglable'
 import Notification from './components/Notification'
+import { setNotification } from './reducers/notificationReducer'
+import { useDispatch } from 'react-redux'
 
 const App = () => {
+
+  const dispatch = useDispatch()
   
   const [blogs, setBlogs] = useState([])
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [notification, setNotification] = useState(null)
+  // const [notification, setNotification] = useState(null)
   
   const blogFormRef = useRef()
 
@@ -33,14 +37,14 @@ const App = () => {
     }
   }, [])
 
-  const notifyWith = (message, type = 'success') => {
-    setNotification({
-      message, type
-    })
-    setTimeout(() => {
-      setNotification(null)
-    }, 5000)
-  }
+  // const notifyWith = (message, type = 'success') => {
+  //   setNotification({
+  //     message, type
+  //   })
+  //   setTimeout(() => {
+  //     setNotification(null)
+  //   }, 5000)
+  // }
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -57,10 +61,10 @@ const App = () => {
       setUser(user)
       setUsername('')
       setPassword('')
-      notifyWith(`${user.name} welcome back`)
+      // notifyWith(`${user.name} welcome back`)
     } catch (exception) {
       console.log(exception)
-      notifyWith(`wrong username/password`, `error`)
+      // notifyWith(`wrong username/password`, `error`)
     }
   }
 
@@ -74,7 +78,8 @@ const App = () => {
     let response = await blogService.create(newBlog)
     newBlog.id = response.id
     setBlogs(blogs.concat(newBlog))
-    notifyWith(`a new blog '${newBlog.title}' by ${newBlog.author} added!`)
+    // notifyWith(`a new blog '${newBlog.title}' by ${newBlog.author} added!`)
+    dispatch(setNotification(`a new blog '${newBlog.title}' by ${newBlog.author} added!`, 3))
   }
 
   const deleteBlog = async ( id ) => {
@@ -92,12 +97,14 @@ const App = () => {
     ))
   }
 
+  // <Notification notification={notification} />
+
+
   if (user === null) {
     return (
       <div>
         <h2>Log in to application</h2>
-
-        <Notification notification={notification} />
+        <Notification />
         <form onSubmit={handleLogin}>
           <div>
             username 
@@ -128,9 +135,8 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
-      <Notification notification={notification} />
       <p>{user.name} is logged in</p>
-      
+      <Notification />
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} updateBlogLikes={updateBlogLikes} deleteBlog={deleteBlog} />
       )}
