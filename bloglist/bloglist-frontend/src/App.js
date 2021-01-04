@@ -51,7 +51,6 @@ const App = () => {
       setUser(user)
       setUsername('')
       setPassword('')
-      // notifyWith(`${user.name} welcome back`)
       dispatch(setNotification({
         message: `${user.name} welcome back`,
         type: 'success'
@@ -62,7 +61,6 @@ const App = () => {
         message: `wrong username/password`,
         type: 'error'
       }, 3))
-      // notifyWith(`wrong username/password`, `error`)
     }
   }
 
@@ -76,12 +74,10 @@ const App = () => {
     let response = await blogService.create(newBlog)
     newBlog.id = response.id
     setBlogs(blogs.concat(newBlog))
-    // notifyWith(`a new blog '${newBlog.title}' by ${newBlog.author} added!`)
     dispatch(setNotification({
         message: `a new blog '${newBlog.title}' by ${newBlog.author} added!`,
         type: 'success'
-      }, 3)
-    )
+      }, 3))
   }
 
   const deleteBlog = async ( id ) => {
