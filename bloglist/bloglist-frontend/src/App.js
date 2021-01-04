@@ -79,7 +79,11 @@ const App = () => {
     newBlog.id = response.id
     setBlogs(blogs.concat(newBlog))
     // notifyWith(`a new blog '${newBlog.title}' by ${newBlog.author} added!`)
-    dispatch(setNotification(`a new blog '${newBlog.title}' by ${newBlog.author} added!`, 3))
+    dispatch(setNotification({
+        message: `a new blog '${newBlog.title}' by ${newBlog.author} added!`,
+        type: 'success'
+      },
+       3))
   }
 
   const deleteBlog = async ( id ) => {

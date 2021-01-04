@@ -8,7 +8,7 @@ const Notification = (/*{ notification }*/) => {
   //   return state.content
   // })
 
-  const notification = useSelector(state => state)
+  const notification = useSelector(state => console.log(state))
   
   if ( !notification ) {
     return null
