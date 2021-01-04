@@ -16,7 +16,6 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  // const [notification, setNotification] = useState(null)
   
   const blogFormRef = useRef()
 
@@ -26,7 +25,7 @@ const App = () => {
 
   useEffect(
     dbHook
-  , [])  // Using blogs's state to rerender leads to an infinite xhr request?
+  , []) 
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
@@ -36,15 +35,6 @@ const App = () => {
       blogService.setToken(user.token)
     }
   }, [])
-
-  // const notifyWith = (message, type = 'success') => {
-  //   setNotification({
-  //     message, type
-  //   })
-  //   setTimeout(() => {
-  //     setNotification(null)
-  //   }, 5000)
-  // }
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -62,8 +52,16 @@ const App = () => {
       setUsername('')
       setPassword('')
       // notifyWith(`${user.name} welcome back`)
+      dispatch(setNotification({
+        message: `${user.name} welcome back`,
+        type: 'success'
+      }, 3))
     } catch (exception) {
       console.log(exception)
+      dispatch(setNotification({
+        message: `wrong username/password`,
+        type: 'error'
+      }, 3))
       // notifyWith(`wrong username/password`, `error`)
     }
   }
@@ -82,8 +80,8 @@ const App = () => {
     dispatch(setNotification({
         message: `a new blog '${newBlog.title}' by ${newBlog.author} added!`,
         type: 'success'
-      },
-       3))
+      }, 3)
+    )
   }
 
   const deleteBlog = async ( id ) => {
@@ -93,16 +91,12 @@ const App = () => {
 
   const updateBlogLikes = async ( newBlog ) => {
     await blogService.updateLikes(newBlog)
-    // Line 74 kind of melts my brain. 
     setBlogs(blogs.map(blog => 
       blog.id === newBlog.id  
       ? {...blog, likes : newBlog.likes} 
       : blog 
     ))
   }
-
-  // <Notification notification={notification} />
-
 
   if (user === null) {
     return (
