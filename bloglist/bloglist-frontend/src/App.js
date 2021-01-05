@@ -7,7 +7,7 @@ import Togglable from './components/Togglable'
 import Notification from './components/Notification'
 import { setNotification } from './reducers/notificationReducer'
 import { useDispatch, useSelector } from 'react-redux'
-import { initializeBlogs } from './reducers/blogReducer'
+import { initializeBlogs, newBlog } from './reducers/blogReducer'
 
 const App = () => {
 
@@ -67,12 +67,11 @@ const App = () => {
     setUser(null)
   }
 
-  const createBlog = async ( newBlog ) => {
+  const createBlog = async ( blog ) => {
     blogFormRef.current.toggleVisibility()
-    let response = await blogService.create(newBlog)
-    newBlog.id = response.id
+    dispatch(newBlog(blog))
     dispatch(setNotification({
-        message: `a new blog '${newBlog.title}' by ${newBlog.author} added!`,
+        message: `a new blog '${blog.title}' by ${blog.author} added!`,
         type: 'success'
       }, 3))
   }
