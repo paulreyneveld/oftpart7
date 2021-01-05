@@ -6,27 +6,39 @@ import BlogForm from './components/BlogForm'
 import Togglable from './components/Togglable'
 import Notification from './components/Notification'
 import { setNotification } from './reducers/notificationReducer'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { initializeBlogs } from './reducers/blogReducer'
 
 const App = () => {
 
   const dispatch = useDispatch()
   
   // Manage blogs with redux
-  const [blogs, setBlogs] = useState([])
+  // const [blogs, setBlogs] = useState([])
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   
   const blogFormRef = useRef()
 
-  const dbHook = () => { blogService.getAll().then(blogs =>
-    setBlogs(blogs.sort((a, b) => a.likes > b.likes ? -1 : 1))
-  ) }
+  const blogs = useSelector(state => state.blogs)
+  console.log(blogs)
 
-  useEffect(
-    dbHook
-  , []) 
+  // This is a weird moment, should I get the bloglist via the reducer? If so,
+  // should I seed the reducer via the backend service function and pass it in
+  // as an action? Yes. The answer is yes. 
+
+  // const dbHook = () => { blogService.getAll().then(blogs =>
+  //   setBlogs(blogs.sort((a, b) => a.likes > b.likes ? -1 : 1))
+  // ) }
+
+  // useEffect(
+  //   dbHook
+  // , []) 
+
+  useEffect(() => {
+    dispatch(initializeBlogs())
+  }, [dispatch])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
@@ -75,7 +87,7 @@ const App = () => {
     let response = await blogService.create(newBlog)
     newBlog.id = response.id
     // Mange with redux
-    setBlogs(blogs.concat(newBlog))
+    // setBlogs(blogs.concat(newBlog))
     dispatch(setNotification({
         message: `a new blog '${newBlog.title}' by ${newBlog.author} added!`,
         type: 'success'
@@ -84,18 +96,18 @@ const App = () => {
 
   const deleteBlog = async ( id ) => {
     // Manage with redux
-    setBlogs(blogs.filter(blog => blog.id !== id))
+    // setBlogs(blogs.filter(blog => blog.id !== id))
     await blogService.removeBlog(id)
   }
 
   const updateBlogLikes = async ( newBlog ) => {
     await blogService.updateLikes(newBlog)
     // Manage with redux
-    setBlogs(blogs.map(blog => 
-      blog.id === newBlog.id  
-      ? {...blog, likes : newBlog.likes} 
-      : blog 
-    ))
+    // setBlogs(blogs.map(blog => 
+    //   blog.id === newBlog.id  
+    //   ? {...blog, likes : newBlog.likes} 
+    //   : blog 
+    // ))
   }
 
   if (user === null) {
@@ -128,6 +140,10 @@ const App = () => {
         </form>
       </div>
     )
+  }
+
+  if (!blogs) {
+    return null
   }
 
   return (
