@@ -7,7 +7,7 @@ import Togglable from './components/Togglable'
 import Notification from './components/Notification'
 import { setNotification } from './reducers/notificationReducer'
 import { useDispatch, useSelector } from 'react-redux'
-import { initializeBlogs, newBlog } from './reducers/blogReducer'
+import { initializeBlogs, newBlog, removeBlog } from './reducers/blogReducer'
 
 const App = () => {
 
@@ -79,7 +79,9 @@ const App = () => {
   const deleteBlog = async ( id ) => {
     // Manage with redux
     // setBlogs(blogs.filter(blog => blog.id !== id))
-    await blogService.removeBlog(id)
+    // const blogToDelete = blogs.filter(blog => blog.id !== id)
+    dispatch(removeBlog(id))
+    // await blogService.removeBlog(id)
   }
 
   const updateBlogLikes = async ( newBlog ) => {
