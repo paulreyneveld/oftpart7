@@ -1,8 +1,12 @@
 import React from 'react'
 import Togglable from './Togglable'
+import { useDispatch } from 'react-redux'
+import { removeBlog } from '../reducers/blogReducer'
 
-const Blog = ({ blog, updateBlogLikes, deleteBlog }) => {
+const Blog = ({ blog, updateBlogLikes }) => {
   
+  const dispatch = useDispatch()
+
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -31,7 +35,7 @@ const Blog = ({ blog, updateBlogLikes, deleteBlog }) => {
         <span className="url">Url: {blog.url}</span> <br />
         <span className="likes"> Likes: {blog.likes} <button id="like" onClick={addLikes}>Like</button></span> <br />
       </Togglable>
-      <button id="remove" onClick={() => deleteBlog(blog.id)}>Remove</button>
+      <button id="remove" onClick={() => dispatch(removeBlog(blog.id))}>Remove</button>
     </div>
   )
 }

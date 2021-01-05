@@ -76,14 +76,6 @@ const App = () => {
       }, 3))
   }
 
-  const deleteBlog = async ( id ) => {
-    // Manage with redux
-    // setBlogs(blogs.filter(blog => blog.id !== id))
-    // const blogToDelete = blogs.filter(blog => blog.id !== id)
-    dispatch(removeBlog(id))
-    // await blogService.removeBlog(id)
-  }
-
   const updateBlogLikes = async ( newBlog ) => {
     await blogService.updateLikes(newBlog)
     // Manage with redux
@@ -136,7 +128,7 @@ const App = () => {
       <p>{user.name} is logged in</p>
       <Notification />
       {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} updateBlogLikes={updateBlogLikes} deleteBlog={deleteBlog} />
+        <Blog key={blog.id} blog={blog} updateBlogLikes={updateBlogLikes} />
       )}
       <Togglable showLabel="Create Blog" hideLabel="cancel" ref={blogFormRef}>
           <BlogForm 

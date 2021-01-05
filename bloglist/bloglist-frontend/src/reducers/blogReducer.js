@@ -37,6 +37,7 @@ export const newBlog = (blog) => {
 }
 
 export const removeBlog = (id) => {
+    console.log('click')
     return async dispatch => {
         await blogService.removeBlog(id)
         dispatch({
