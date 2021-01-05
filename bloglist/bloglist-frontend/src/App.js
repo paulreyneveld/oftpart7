@@ -12,9 +12,7 @@ import { initializeBlogs } from './reducers/blogReducer'
 const App = () => {
 
   const dispatch = useDispatch()
-  
-  // Manage blogs with redux
-  // const [blogs, setBlogs] = useState([])
+
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
@@ -22,19 +20,6 @@ const App = () => {
   const blogFormRef = useRef()
 
   const blogs = useSelector(state => state.blogs)
-  console.log(blogs)
-
-  // This is a weird moment, should I get the bloglist via the reducer? If so,
-  // should I seed the reducer via the backend service function and pass it in
-  // as an action? Yes. The answer is yes. 
-
-  // const dbHook = () => { blogService.getAll().then(blogs =>
-  //   setBlogs(blogs.sort((a, b) => a.likes > b.likes ? -1 : 1))
-  // ) }
-
-  // useEffect(
-  //   dbHook
-  // , []) 
 
   useEffect(() => {
     dispatch(initializeBlogs())
@@ -86,8 +71,6 @@ const App = () => {
     blogFormRef.current.toggleVisibility()
     let response = await blogService.create(newBlog)
     newBlog.id = response.id
-    // Mange with redux
-    // setBlogs(blogs.concat(newBlog))
     dispatch(setNotification({
         message: `a new blog '${newBlog.title}' by ${newBlog.author} added!`,
         type: 'success'
