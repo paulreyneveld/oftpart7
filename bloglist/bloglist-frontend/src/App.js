@@ -7,7 +7,7 @@ import Togglable from './components/Togglable'
 import Notification from './components/Notification'
 import { setNotification } from './reducers/notificationReducer'
 import { useDispatch, useSelector } from 'react-redux'
-import { initializeBlogs, newBlog, removeBlog } from './reducers/blogReducer'
+import { initializeBlogs, newBlog } from './reducers/blogReducer'
 
 const App = () => {
 
