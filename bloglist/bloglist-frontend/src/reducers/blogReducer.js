@@ -9,6 +9,11 @@ const blogReducer = (state = [], action) => {
             return state.concat(content)
         case 'REMOVE_BLOG':
             return state.filter(blog => blog.id !== action.data)
+        case 'INCREMENT_LIKE':
+            return state.map(blog => 
+                blog.id === action.data.blog.id 
+                ? { ...blog, likes: action.data.blog.likes}
+                : blog)
         default: 
             return state
     }
@@ -48,8 +53,6 @@ export const removeBlog = (id) => {
 }
 
 export const incrementLike = (blog) => {
-    console.log('click')
-    console.log(blog)
     return async dispatch => {
         await blogService.updateLikes(blog)
         dispatch({
