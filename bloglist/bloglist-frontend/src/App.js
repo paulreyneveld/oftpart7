@@ -7,7 +7,7 @@ import Togglable from './components/Togglable'
 import Notification from './components/Notification'
 import { setNotification } from './reducers/notificationReducer'
 import { useDispatch, useSelector } from 'react-redux'
-import { initializeBlogs, newBlog } from './reducers/blogReducer'
+import { initializeBlogs, newBlog, incrementLike } from './reducers/blogReducer'
 
 const App = () => {
 
@@ -77,7 +77,8 @@ const App = () => {
   }
 
   const updateBlogLikes = async ( newBlog ) => {
-    await blogService.updateLikes(newBlog)
+    dispatch(incrementLike(newBlog))
+    // await blogService.updateLikes(newBlog)
     // Manage with redux
     // setBlogs(blogs.map(blog => 
     //   blog.id === newBlog.id  

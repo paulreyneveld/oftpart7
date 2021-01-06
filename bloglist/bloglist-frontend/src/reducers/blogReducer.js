@@ -49,13 +49,14 @@ export const removeBlog = (id) => {
 
 export const incrementLike = (blog) => {
     console.log('click')
-    // return async dispatch => {
-    //     await blogService.updateLikes(blog)
-    //     dispatch({
-    //         type: 'INCREMENT_LIKE',
-    //         data: id
-    //     })
-    // }
+    console.log(blog)
+    return async dispatch => {
+        await blogService.updateLikes(blog)
+        dispatch({
+            type: 'INCREMENT_LIKE',
+            data: { blog }
+        })
+    }
 }
 
 // I need action creators for blog retrieval and adding a new blog
