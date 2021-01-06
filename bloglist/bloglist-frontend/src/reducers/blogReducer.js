@@ -47,6 +47,17 @@ export const removeBlog = (id) => {
     }
 }
 
+export const incrementLike = (id) => {
+    console.log('click')
+    return async dispatch => {
+        await blogService.updateLikes(id)
+        dispatch({
+            type: 'INCREMENT_LIKE',
+            data: id
+        })
+    }
+}
+
 // I need action creators for blog retrieval and adding a new blog
 
 export default blogReducer
