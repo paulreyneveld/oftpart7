@@ -1,6 +1,6 @@
 import blogService from '../services/blogs'
 
-const blogReducer = (state = [], action) => {
+const reducer = (state = [], action) => {
     switch (action.type) {
         case 'INIT_BLOGS':
             return action.data
@@ -61,4 +61,4 @@ export const incrementLike = (blog) => {
     }
 }
 
-export default blogReducer
+export default reducer
