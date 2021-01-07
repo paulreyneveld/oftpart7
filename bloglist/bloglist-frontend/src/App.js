@@ -8,6 +8,7 @@ import Notification from './components/Notification'
 import { setNotification } from './reducers/notificationReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { initializeBlogs, newBlog, incrementLike } from './reducers/blogReducer'
+import { initializeUser } from './reducers/loginReducer'
 
 const App = () => {
 
@@ -29,10 +30,15 @@ const App = () => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
     if (loggedUserJSON) { 
       const user = JSON.parse(loggedUserJSON)
+      console.log(user)
       setUser(user)
       blogService.setToken(user.token)
     }
   }, [])
+
+  useEffect(() => {
+    dispatch(initializeUser())
+  }, [dispatch])
 
   const handleLogin = async (event) => {
     event.preventDefault()
