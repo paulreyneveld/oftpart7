@@ -42,7 +42,6 @@ export const newBlog = (blog) => {
 }
 
 export const removeBlog = (id) => {
-    console.log('click')
     return async dispatch => {
         await blogService.removeBlog(id)
         dispatch({
@@ -61,7 +60,5 @@ export const incrementLike = (blog) => {
         })
     }
 }
-
-// I need action creators for blog retrieval and adding a new blog
 
 export default blogReducer
