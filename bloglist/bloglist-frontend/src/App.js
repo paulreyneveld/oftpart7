@@ -78,13 +78,6 @@ const App = () => {
 
   const updateBlogLikes = async ( newBlog ) => {
     dispatch(incrementLike(newBlog))
-    // await blogService.updateLikes(newBlog)
-    // Manage with redux
-    // setBlogs(blogs.map(blog => 
-    //   blog.id === newBlog.id  
-    //   ? {...blog, likes : newBlog.likes} 
-    //   : blog 
-    // ))
   }
 
   if (user === null) {
