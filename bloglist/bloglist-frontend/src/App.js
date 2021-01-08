@@ -14,11 +14,12 @@ const App = () => {
 
   const dispatch = useDispatch()
 
-  const userInfo = useSelector(state => state.login)
+  const userInfo = useSelector(state => {
+    return state.login
+  })
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [user, setUser] = useState(null)
   
   const blogFormRef = useRef()
 
@@ -28,18 +29,13 @@ const App = () => {
     dispatch(initializeBlogs())
   }, [dispatch])
 
-  // useEffect(() => {
-  //   const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
-  //   if (loggedUserJSON) { 
-  //     const user = JSON.parse(loggedUserJSON)
-  //     console.log(user)
-  //     setUser(user)
-  //     blogService.setToken(user.token)
-  //   }
-  // }, [])
-
   useEffect(() => {
-    dispatch(initializeUser())
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
+    if (loggedUserJSON) { 
+      const user = JSON.parse(loggedUserJSON)
+      dispatch(initializeUser(user))
+      blogService.setToken(user.token)
+    }
   }, [dispatch])
 
   const handleLogin = async (event) => {
@@ -54,7 +50,7 @@ const App = () => {
         'loggedBlogappUser', JSON.stringify(user)
       )
       blogService.setToken(user.token)
-      setUser(user)
+      dispatch(initializeUser(user))
       setUsername('')
       setPassword('')
       dispatch(setNotification({
@@ -72,7 +68,7 @@ const App = () => {
 
   const handleLogout = () => {
     window.localStorage.removeItem('loggedBlogappUser')
-    setUser(null)
+    dispatch(initializeUser(null))
   }
 
   const createBlog = async ( blog ) => {
