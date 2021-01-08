@@ -8,6 +8,13 @@ import blogReducer from './reducers/blogReducer'
 import loginReducer from './reducers/loginReducer'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from 'react-router-dom'
+import Users from './components/Users'
 
 const reducer = combineReducers({
     notification: notificationReducer,
@@ -24,7 +31,14 @@ const store = createStore(
 
 ReactDOM.render(
     <Provider store={store}>
+    <Router>
+    <Switch>
+    <Route path="/users">
+        <Users />
+    </Route>
         <App />
+    </Switch>
+    </Router>
     </Provider>, 
     document.getElementById('root')
 )
