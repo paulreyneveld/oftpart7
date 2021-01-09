@@ -1,7 +1,13 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 const Users = () => {
-    return <h1> Hello world </h1>
+
+    const loggedInUser = useSelector(state => console.log(state))
+    return (
+        <h2>blogs</h2>
+
+    )
 }
 
 export default Users
