@@ -8,6 +8,12 @@ import blogReducer from './reducers/blogReducer'
 import loginReducer from './reducers/loginReducer'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import {
+    BrowserRouter as Router,
+    Link,
+    Switch,
+    Route
+} from 'react-router-dom'
 
 const reducer = combineReducers({
     notification: notificationReducer,
