@@ -8,15 +8,17 @@ import Notification from './components/Notification'
 import { setNotification } from './reducers/notificationReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { initializeBlogs, newBlog, incrementLike } from './reducers/blogReducer'
-import { initializeUser } from './reducers/loginReducer'
+import { initializeUser, clearUser } from './reducers/loginReducer'
 
 const App = () => {
 
   const dispatch = useDispatch()
 
   const userInfo = useSelector(state => {
+    console.log(state.login)
     return state.login
   })
+  console.log(userInfo)
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -68,7 +70,7 @@ const App = () => {
 
   const handleLogout = () => {
     window.localStorage.removeItem('loggedBlogappUser')
-    dispatch(initializeUser(null))
+    dispatch(clearUser(null))
   }
 
   const createBlog = async ( blog ) => {
@@ -84,7 +86,7 @@ const App = () => {
     dispatch(incrementLike(newBlog))
   }
 
-  if (userInfo === null) {
+  if (!userInfo.loggedIn) {
     return (
       <div>
         <h2>Log in to application</h2>

@@ -1,7 +1,17 @@
-const reducer = (state = [], action) => {
+const reducer = (state = {}, action) => {
     switch (action.type) {
         case 'INIT_USER':
-            return action.data
+            return {
+                ...state,
+                user: action.data,
+                loggedIn: true
+            }
+        case 'CLEAR_USER':
+            return {
+                ...state,
+                user: null,
+                loggedIn: false
+            }
         default:
             return state
     }
@@ -12,6 +22,14 @@ export const initializeUser = (user) => {
         dispatch({
             type: 'INIT_USER',
             data: user
+        })
+    }
+}
+
+export const clearUser = (user) => {
+    return dispatch => {
+        dispatch({
+            type: 'CLEAR_USER',
         })
     }
 }
