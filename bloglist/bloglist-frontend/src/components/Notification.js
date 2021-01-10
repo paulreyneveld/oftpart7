@@ -3,9 +3,12 @@ import { useSelector } from 'react-redux'
 
 const Notification = () => {
 
-  const notification = useSelector(state => state.notification)
+  const notification = useSelector(state => {
+    console.log(state.notification)
+    return state.notification
+  })
   
-  if ( !notification ) {
+  if (!notification.notify) {
     return null
   }
 
@@ -18,7 +21,7 @@ const Notification = () => {
   }
 
   return <div style={style}>
-    {notification.message}
+    {notification.content.message}
   </div>
 }
 
