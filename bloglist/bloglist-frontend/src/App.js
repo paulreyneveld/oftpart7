@@ -13,6 +13,8 @@ import {
 } from 'react-router-dom'
 import Users from './components/Users'
 import Home from './components/Home'
+import { clearUser } from './reducers/loginReducer'
+
 
 const App = () => {
 
@@ -37,12 +39,17 @@ const App = () => {
     const users = await userService.getAll()
     dispatch(initializeUsers(users))
   }
-  
+
   const userInfo = useSelector(state => {
     return state.login
   })
   
   const blogs = useSelector(state => state.blogs)
+
+  const handleLogout = () => {
+    window.localStorage.removeItem('loggedBlogappUser')
+    dispatch(clearUser(null))
+}
 
   if (!userInfo.loggedIn) {
     return <Login />
@@ -56,12 +63,15 @@ const App = () => {
     <Router>
     <Switch>
       <Route path="/users">
-        <Users />
+        <Users 
+          handleLogout={handleLogout}
+        />
       </Route>
       <Route path="/">
         <Home 
           userInfo={userInfo}
           blogs={blogs}
+          handleLogout={handleLogout}
         />
       </Route>
     </Switch>

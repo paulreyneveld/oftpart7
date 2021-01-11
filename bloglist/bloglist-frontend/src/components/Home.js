@@ -6,18 +6,12 @@ import BlogForm from '../components/BlogForm'
 import { useDispatch } from 'react-redux'
 import { newBlog, incrementLike } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
-import { clearUser } from '../reducers/loginReducer'
 
-const Home = ({ userInfo, blogs }) => {
+const Home = ({ userInfo, blogs, handleLogout }) => {
 
     const dispatch = useDispatch()
 
     const blogFormRef = useRef()
-
-    const handleLogout = () => {
-        window.localStorage.removeItem('loggedBlogappUser')
-        dispatch(clearUser(null))
-      }
 
     const createBlog = async ( blog ) => {
         blogFormRef.current.toggleVisibility()
