@@ -10,6 +10,12 @@ import { setNotification } from './reducers/notificationReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { initializeBlogs, newBlog, incrementLike } from './reducers/blogReducer'
 import { initializeUser, clearUser } from './reducers/loginReducer'
+import {
+  BrowserRouter as Router, 
+  Redirect, 
+  Switch } from 'react-router-dom'
+import Users from './components/Users'
+import Home from './components/Home'
 
 const App = () => {
 
@@ -21,7 +27,7 @@ const App = () => {
   })
   console.log(userInfo)
   
-  const blogFormRef = useRef()
+  // const blogFormRef = useRef()
 
   const blogs = useSelector(state => state.blogs)
 
@@ -37,24 +43,6 @@ const App = () => {
       blogService.setToken(user.token)
     }
   }, [dispatch])
-
-  const handleLogout = () => {
-    window.localStorage.removeItem('loggedBlogappUser')
-    dispatch(clearUser(null))
-  }
-
-  const createBlog = async ( blog ) => {
-    blogFormRef.current.toggleVisibility()
-    dispatch(newBlog(blog))
-    dispatch(setNotification({
-        message: `a new blog '${blog.title}' by ${blog.author} added!`,
-        type: 'success'
-      }, 3))
-  }
-
-  const updateBlogLikes = async ( newBlog ) => {
-    dispatch(incrementLike(newBlog))
-  }
 
   // if (!userInfo.loggedIn) {
   //   return (
@@ -91,25 +79,26 @@ const App = () => {
   if (!userInfo.loggedIn) {
     return <Login />
   }
+
   if (!blogs) {
     return null
   }
 
   return (
-    <div>
-      <h2>blogs</h2>
-      {/* <p>{userInfo.user.name} is logged in</p> */}
-      <Notification />
-      {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} updateBlogLikes={updateBlogLikes} />
-      )}
-      <Togglable showLabel="Create Blog" hideLabel="cancel" ref={blogFormRef}>
-          <BlogForm 
-            createBlog={createBlog}
-          />
-      </Togglable>
-      <button onClick={handleLogout}>Logout</button>
-    </div>
+    <Router>
+
+    <Switch>
+      <Router path="/users">
+        <Users />
+      </Router>
+      <Router path="/">
+        <Home 
+          userInfo={userInfo}
+          blogs={blogs}
+        />
+      </Router>
+    </Switch>
+    </Router>
   )
 }
 

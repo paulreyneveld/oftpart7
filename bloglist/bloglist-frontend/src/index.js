@@ -31,18 +31,8 @@ const store = createStore(
 )
 ReactDOM.render(
     <Provider store={store}>
-        <Router>
-        <Switch>
-        <Route path="/users">
-            <Users />
-        </Route>
-        <Route path="/">
             <App />
-        </Route>
-        </Switch>    
-        </Router>
     </Provider>, 
     document.getElementById('root')
 )
 console.log(store.getState(reducer))
-// sstore.subscribe(reducer)

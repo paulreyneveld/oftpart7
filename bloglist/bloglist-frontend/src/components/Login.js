@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import loginService from '../services/login'
 import blogService from '../services/blogs'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { initializeUser } from '../reducers/loginReducer'
 import { setNotification } from '../reducers/notificationReducer'
 import Notification from '../components/Notification'
@@ -12,6 +12,8 @@ const Login = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
+    const isLoggedIn = useSelector(state => state.login)
+    console.log(isLoggedIn)
     const dispatch = useDispatch()
 
     const handleLogin = async (event) => {
