@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 
 const Users = () => {
 
-    const loggedInUser = useSelector(state => state)
-    console.log(loggedInUser)
+    const users = useSelector(state => state.users)
+    console.log(users)
     return (
         <h2>blogs</h2>
 

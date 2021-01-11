@@ -13,7 +13,6 @@ const Login = () => {
     const [password, setPassword] = useState('')
 
     const isLoggedIn = useSelector(state => state.login)
-    console.log(isLoggedIn)
     const dispatch = useDispatch()
 
     const handleLogin = async (event) => {

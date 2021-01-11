@@ -5,6 +5,7 @@ import Login from './components/Login'
 import { useDispatch, useSelector } from 'react-redux'
 import { initializeBlogs} from './reducers/blogReducer'
 import { initializeUser } from './reducers/loginReducer'
+import { initializeUsers } from './reducers/userReducer'
 import {
   BrowserRouter as Router, 
   Route,
@@ -34,10 +35,10 @@ const App = () => {
 
   const getUsers = async () => {
     const users = await userService.getAll()
-    console.log(users)
+    dispatch(initializeUsers(users))
   }
+  
   const userInfo = useSelector(state => {
-    console.log(state.login)
     return state.login
   })
   
