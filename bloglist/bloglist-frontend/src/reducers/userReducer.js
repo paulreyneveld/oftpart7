@@ -1,10 +1,7 @@
-const reducer = (state = {}, action) => {
+const reducer = (state = [], action) => {
     switch (action.type) {
         case 'INIT_USERS':
-            return {
-                ...state,
-                users: action.data
-            }
+            return state.concat(action.data)
         default: 
             return state
     }    
