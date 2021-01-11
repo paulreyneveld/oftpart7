@@ -16,13 +16,6 @@ const App = () => {
 
   const dispatch = useDispatch()
 
-  const userInfo = useSelector(state => {
-    console.log(state.login)
-    return state.login
-  })
-  
-  const blogs = useSelector(state => state.blogs)
-
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
     if (loggedUserJSON) { 
@@ -33,6 +26,13 @@ const App = () => {
 
     }
   }, [dispatch])
+
+  const userInfo = useSelector(state => {
+    console.log(state.login)
+    return state.login
+  })
+  
+  const blogs = useSelector(state => state.blogs)
 
   if (!userInfo.loggedIn) {
     return <Login />
