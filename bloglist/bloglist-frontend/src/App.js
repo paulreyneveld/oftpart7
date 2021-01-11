@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import blogService from './services/blogs'
+import userService from './services/users'
 import Login from './components/Login'
 import { useDispatch, useSelector } from 'react-redux'
 import { initializeBlogs} from './reducers/blogReducer'
@@ -23,10 +24,18 @@ const App = () => {
       dispatch(initializeUser(user))
       blogService.setToken(user.token)
       dispatch(initializeBlogs())
-
     }
   }, [dispatch])
 
+  useEffect(() => {
+    getUsers()
+  }, [])
+
+
+  const getUsers = async () => {
+    const users = await userService.getAll()
+    console.log(users)
+  }
   const userInfo = useSelector(state => {
     console.log(state.login)
     return state.login
