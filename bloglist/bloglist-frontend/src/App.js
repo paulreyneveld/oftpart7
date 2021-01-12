@@ -14,6 +14,7 @@ import {
 import Users from './components/Users'
 import Home from './components/Home'
 import { clearUser } from './reducers/loginReducer'
+import User from './components/User'
 
 
 const App = () => {
@@ -67,6 +68,7 @@ const App = () => {
           handleLogout={handleLogout}
         />
       </Route>
+      <Route path={`/user/:userId`} component={User} />
       <Route path="/">
         <Home 
           userInfo={userInfo}
