@@ -68,7 +68,10 @@ const App = () => {
           handleLogout={handleLogout}
         />
       </Route>
-      <Route path={`/user/:userId`} component={User}>
+      <Route path={`/user/:userId`} 
+        component={User}
+        handleLogout={handleLogout}
+        >
 
       </Route>
       <Route path="/">

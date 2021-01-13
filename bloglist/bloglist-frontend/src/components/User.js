@@ -3,9 +3,19 @@ import { useSelector } from 'react-redux'
 
 const User = (props) => {
     console.log(props.match.params.userId)
-    const user = useSelector(state => state.users)
+    const targetId = props.match.params.userId
+    const users = useSelector(state => state.users)
+    
+    const user = users.filter(user => user.id === targetId )
     console.log(user)
-    return <h1>Hello world</h1>
+    return (
+        <>
+        <h2>blogs</h2>
+        <p>is logged in.</p>
+        </>
+    )
+    
+    
 }
 
 export default User
