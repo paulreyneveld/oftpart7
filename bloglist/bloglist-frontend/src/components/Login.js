@@ -12,7 +12,6 @@ const Login = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
-    const isLoggedIn = useSelector(state => state.login)
     const dispatch = useDispatch()
 
     const handleLogin = async (event) => {
@@ -28,8 +27,6 @@ const Login = () => {
         )
         blogService.setToken(user.token)
         dispatch(initializeUser(user))
-        // setUsername('')
-        // setPassword('')
         dispatch(setNotification({
           message: `${user.name} welcome back`,
           type: 'success'
