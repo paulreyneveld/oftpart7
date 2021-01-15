@@ -32,14 +32,18 @@ const App = () => {
   }, [dispatch])
 
   useEffect(() => {
+      const getUsers = async () => {
+      const users = await userService.getAll()
+      dispatch(initializeUsers(users))
+    }
     getUsers()
   }, [])
 
 
-  const getUsers = async () => {
-    const users = await userService.getAll()
-    dispatch(initializeUsers(users))
-  }
+  // const getUsers = async () => {
+  //   const users = await userService.getAll()
+  //   dispatch(initializeUsers(users))
+  // }
 
   const userInfo = useSelector(state => {
     return state.login

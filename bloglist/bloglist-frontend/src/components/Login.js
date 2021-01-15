@@ -28,8 +28,8 @@ const Login = () => {
         )
         blogService.setToken(user.token)
         dispatch(initializeUser(user))
-        setUsername('')
-        setPassword('')
+        // setUsername('')
+        // setPassword('')
         dispatch(setNotification({
           message: `${user.name} welcome back`,
           type: 'success'
