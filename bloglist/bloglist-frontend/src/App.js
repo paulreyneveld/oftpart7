@@ -69,12 +69,7 @@ const App = () => {
           handleLogout={handleLogout}
         />
       </Route>
-      <Route path={`/user/:userId`} 
-        component={User}
-        handleLogout={handleLogout}
-        >
-
-      </Route>
+      <Route path={`/user/:userId`} render={props => <User {...props} handleLogout={handleLogout} />} />
       <Route path="/">
         <Home 
           userInfo={userInfo}
