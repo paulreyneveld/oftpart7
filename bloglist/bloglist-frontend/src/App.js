@@ -22,13 +22,16 @@ const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
-    if (loggedUserJSON) { 
-      const user = JSON.parse(loggedUserJSON)
-      dispatch(initializeUser(user))
-      blogService.setToken(user.token)
-      dispatch(initializeBlogs())
+    const checkLoggedIn = () => {
+      const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
+      if (loggedUserJSON) { 
+        const user = JSON.parse(loggedUserJSON)
+        dispatch(initializeUser(user))
+        blogService.setToken(user.token)
+        dispatch(initializeBlogs())
+      }
     }
+    checkLoggedIn()
   }, [dispatch])
 
   useEffect(() => {
@@ -37,13 +40,7 @@ const App = () => {
       dispatch(initializeUsers(users))
     }
     getUsers()
-  }, [])
-
-
-  // const getUsers = async () => {
-  //   const users = await userService.getAll()
-  //   dispatch(initializeUsers(users))
-  // }
+  }, [dispatch])
 
   const userInfo = useSelector(state => {
     return state.login
