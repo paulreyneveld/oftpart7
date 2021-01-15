@@ -14,10 +14,11 @@ const User = (props) => {
     return (
         <>
         <h2>blogs</h2>
-        <p> {loggedIn} logged in</p>
+        <p> {loggedIn} is logged in</p>
         <button onClick={props.handleLogout}>Logout</button>
         <h2>{user[0].name}</h2>
         <h3>added blogs</h3>
+        {user[0].blogs.map(blog => <li>{blog.title}</li>)}
         </>
     )    
 }
