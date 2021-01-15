@@ -6,16 +6,17 @@ const User = (props) => {
     const targetId = props.match.params.userId
     const users = useSelector(state => state.users)
     
-    const user = users.filter(user => user.id === targetId )
-    console.log(user)
+    const user = users.filter(user => user.id === targetId)
+
+    if (!user) {
+        return null
+    }
+    
     return (
         <>
-        <h2>blogs</h2>
-        <p>is logged in.</p>
+        <p> {user[0].name}</p>
         </>
-    )
-    
-    
+    )    
 }
 
 export default User
