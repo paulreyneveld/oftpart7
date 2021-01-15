@@ -8,7 +8,7 @@ const User = (props) => {
     
     const user = users.filter(user => user.id === targetId)
 
-    if (!user) {
+    if (user.length === 0) {
         return null
     }
     
