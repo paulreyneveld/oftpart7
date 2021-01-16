@@ -7,6 +7,7 @@ import BlogBeta from '../components/BlogBeta'
 import { useDispatch } from 'react-redux'
 import { newBlog, incrementLike } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
+import { Link } from 'react-router-dom'
 
 const Home = ({ userInfo, blogs, handleLogout }) => {
 
@@ -27,6 +28,14 @@ const Home = ({ userInfo, blogs, handleLogout }) => {
         dispatch(incrementLike(newBlog))
       }
 
+      const blogStyle = {
+        paddingTop: 10,
+        paddingLeft: 2,
+        border: 'solid',
+        borderWidth: 1,
+        marginBottom: 5
+      }
+
     return (
         <div>
         <Notification />
@@ -39,10 +48,7 @@ const Home = ({ userInfo, blogs, handleLogout }) => {
             />
         </Togglable>
 
-
-        {blogs.map(blog =>
-          <BlogBeta key={blog.id} blog={blog} updateBlogLikes={updateBlogLikes} />
-        )}
+        {blogs.map(blog => <p style={blogStyle}><Link to={`/blogs${blog.id}`}>{blog.title}</Link></p>)}
       </div>
     )
 }
