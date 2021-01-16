@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BlogBeta = ({blog, updateBlogLikes}) => {
+const BlogBeta = ({blogs, updateBlogLikes, handleLogout}) => {
     return (
         <>
         <h2>blogs</h2>

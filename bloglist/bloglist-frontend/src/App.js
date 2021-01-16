@@ -15,6 +15,7 @@ import Users from './components/Users'
 import Home from './components/Home'
 import { clearUser } from './reducers/loginReducer'
 import User from './components/User'
+import BlogBeta from './components/BlogBeta'
 
 
 const App = () => {
@@ -70,6 +71,7 @@ const App = () => {
         />
       </Route>
       <Route path={`/user/:userId`} render={(props) => <User {...props} handleLogout={handleLogout} /> } />
+      <Route path={`/blogs/:blogId`} render={(props) => <BlogBeta {...props} blogs={blogs} handleLogout={handleLogout} />} />
       <Route path="/">
         <Home 
           userInfo={userInfo}

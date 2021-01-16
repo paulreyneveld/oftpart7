@@ -48,7 +48,7 @@ const Home = ({ userInfo, blogs, handleLogout }) => {
             />
         </Togglable>
 
-        {blogs.map(blog => <p style={blogStyle}><Link to={`/blogs${blog.id}`}>{blog.title}</Link></p>)}
+        {blogs.map(blog => <p style={blogStyle}><Link to={`/blogs/${blog.id}`}>{blog.title}</Link></p>)}
       </div>
     )
 }
