@@ -11,13 +11,13 @@ const BlogBeta = (props, { updateBlogLikes, handleLogout }) => {
     console.log(blog)
     const addLikes = (event) => {
         event.preventDefault()
-        updateBlogLikes({
-          user: blog.user,
-          title: blog.title,
-          author: blog.author,
-          url: blog.url,
-          likes: blog.likes + 1,
-          id: blog.id
+        props.updateBlogLikes({
+          user: blog[0].user,
+          title: blog[0].title,
+          author: blog[0].author,
+          url: blog[0].url,
+          likes: blog[0].likes + 1,
+          id: blog[0].id
         })
       }
 
@@ -29,9 +29,10 @@ const BlogBeta = (props, { updateBlogLikes, handleLogout }) => {
         <>
         <h2>blogs</h2>
         <p>{loggedIn} logged in </p>
-        <button onClick={handleLogout}>Logout</button>
+        <button onClick={props.handleLogout}>Logout</button>
         <h2>{blog[0].title}</h2>
         <p><a href={`http://${blog[0].url}`}>{blog[0].url}</a></p>
+        <p>{blog[0].likes} likes <button onClick={addLikes}>like</button></p>
         <p>added by {blog[0].author}</p>
         </>
     )
