@@ -1,13 +1,18 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { newComment } from '../reducers/blogReducer'
 
 const Blog = (props, { updateBlogLikes, handleLogout }) => {
+
+    const [comment, setComment] = useState('')
+    const dispatch = useDispatch()
+
     const targetId = props.match.params.blogId
     const loggedIn = useSelector(state => state.login.user.name)
     const blog = useSelector(state => state.blogs.filter(blog =>    
         blog.id === targetId
     ))
-    console.log(blog)
+
     const addLikes = (event) => {
         event.preventDefault()
         props.updateBlogLikes({
@@ -18,7 +23,22 @@ const Blog = (props, { updateBlogLikes, handleLogout }) => {
           likes: blog[0].likes + 1,
           id: blog[0].id
         })
-      }
+    }
+    
+    const addComment = (event) => {
+        event.preventDefault()
+        dispatch(Comment(blog, comment))
+        setComment('')
+    }
+
+    console.log(blog)
+    const conditionalComments = () => {
+        if (blog[0].comments.length > 0) {
+            blog[0].comments.map(comment => {
+                return <li key={comment._id}>{comment.body}</li>
+            })
+        }
+    }
 
     if (blog.length < 1) {
         return null
@@ -32,8 +52,17 @@ const Blog = (props, { updateBlogLikes, handleLogout }) => {
         <p>{blog[0].likes} likes <button onClick={addLikes}>like</button></p>
         <p>added by {blog[0].author}</p>
         <h3>Comments</h3>
-        {blog[0].comments.map(comment => {
-            return <li key={comment._id}>{comment.body}</li>})}
+        <form onSubmit={addComment}>
+        <input 
+            id="comment"
+            type="text"
+            value={comment}
+            name="Title"
+            onChange={({ target }) => setComment(target.value)}
+        />
+        <button type="submit" id="new-comment">Comment</button>
+        </form>
+        {conditionalComments()}
         </>
     )
 }

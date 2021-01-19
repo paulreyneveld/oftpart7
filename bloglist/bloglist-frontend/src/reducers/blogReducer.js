@@ -14,6 +14,8 @@ const reducer = (state = [], action) => {
                 blog.id === action.data.blog.id 
                 ? { ...blog, likes: action.data.blog.likes}
                 : blog)
+        case 'ADD_COMMENT':
+
         default: 
             return state
     }
@@ -57,6 +59,23 @@ export const incrementLike = (blog) => {
         dispatch({
             type: 'INCREMENT_LIKE',
             data: { blog }
+        })
+    }
+}
+
+export const newComment = (blog, comment) => {
+    return async dispatch => {
+        const newComment = {
+            id: blog.id,
+            body: comment
+        }
+        await blogService.updateComments(newComment)
+        console.log(blog)
+        console.log(comment)
+        console.log(blog[0].comments.concat)
+        dispatch({
+            type: 'ADD_COMMENT',
+            data: comment
         })
     }
 }
