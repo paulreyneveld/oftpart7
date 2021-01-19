@@ -40,8 +40,6 @@ const Home = ({ userInfo, blogs, handleLogout }) => {
         <div>
         <Notification />
         <h2>blogs</h2>
-        <p>{userInfo.user.name} is logged in</p>
-        <button onClick={handleLogout}>Logout</button>
         <Togglable showLabel="Create Blog" hideLabel="cancel" ref={blogFormRef}>
             <BlogForm 
               createBlog={createBlog}

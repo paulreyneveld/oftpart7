@@ -8,7 +8,6 @@ const BlogBeta = (props, { updateBlogLikes, handleLogout }) => {
         blog.id === targetId
     ))
 
-    console.log(blog)
     const addLikes = (event) => {
         event.preventDefault()
         props.updateBlogLikes({
@@ -28,8 +27,7 @@ const BlogBeta = (props, { updateBlogLikes, handleLogout }) => {
     return (
         <>
         <h2>blogs</h2>
-        <p>{loggedIn} logged in </p>
-        <button onClick={props.handleLogout}>Logout</button>
+
         <h2>{blog[0].title}</h2>
         <p><a href={`http://${blog[0].url}`}>{blog[0].url}</a></p>
         <p>{blog[0].likes} likes <button onClick={addLikes}>like</button></p>

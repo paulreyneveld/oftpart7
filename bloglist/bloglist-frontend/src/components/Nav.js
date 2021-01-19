@@ -17,7 +17,6 @@ const Nav = ({ handleLogout }) => {
 
     return (
         <div style={style}>
-            <Link style={linkStyle} to='/'>Home</Link>
             <Link style={linkStyle} to='/blogs'>Blogs</Link>
             <Link style={linkStyle} to='/users'>Users</Link>
             <span>{loggedIn} logged in <button onClick={handleLogout}>Logout</button></span>
