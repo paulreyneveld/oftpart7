@@ -64,8 +64,19 @@ blogsRouter.put('/:id', async (request, response) => {
   response.status(200).end()
 })
 
-blogsRouter.post('/:id/comments', (request, response) => {
-  console.log('comments endpoint.')
+blogsRouter.post('/:id/comments', async (request, response) => {
+  const blogToUpdate = await Blog.findById(request.params.id)
+  const body = request.body
+  const updated = blogToUpdate.comments.concat(body)
+  const blog = {
+    title: blogToUpdate.title,
+    author: blogToUpdate.author,
+    url: blogToUpdate.url,
+    likes: blogToUpdate.likes,
+    comments: updated
+  }
+  await Blog.findByIdAndUpdate(request.params.id, blog, { new: true })
+
 })
 
 module.exports = blogsRouter
