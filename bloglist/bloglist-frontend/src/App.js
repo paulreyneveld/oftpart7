@@ -13,6 +13,7 @@ import {
 } from 'react-router-dom'
 import Users from './components/Users'
 import Home from './components/Home'
+import Nav from './components/Nav'
 import { clearUser } from './reducers/loginReducer'
 import { incrementLike } from './reducers/blogReducer'
 import User from './components/User'
@@ -69,6 +70,7 @@ const App = () => {
 
   return (
     <Router>
+    <Nav />
     <Switch>
       <Route path="/users">
         <Users 
