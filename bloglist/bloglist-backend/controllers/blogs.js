@@ -64,4 +64,8 @@ blogsRouter.put('/:id', async (request, response) => {
   response.status(200).end()
 })
 
+blogsRouter.post('/:id/comments', (request, response) => {
+  console.log('comments endpoint.')
+})
+
 module.exports = blogsRouter
