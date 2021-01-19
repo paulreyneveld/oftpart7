@@ -70,7 +70,7 @@ const App = () => {
 
   return (
     <Router>
-    <Nav />
+    <Nav handleLogout={handleLogout} />
     <Switch>
       <Route path="/users">
         <Users 
