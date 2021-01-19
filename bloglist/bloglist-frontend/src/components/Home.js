@@ -3,7 +3,7 @@ import Blog from '../components/Blog'
 import Notification from '../components/Notification'
 import Togglable from '../components/Togglable'
 import BlogForm from '../components/BlogForm'
-import BlogBeta from '../components/BlogBeta'
+import BlogBeta from './Blog'
 import { useDispatch } from 'react-redux'
 import { newBlog, incrementLike } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
@@ -46,7 +46,7 @@ const Home = ({ userInfo, blogs, handleLogout }) => {
             />
         </Togglable>
 
-        {blogs.map(blog => <p style={blogStyle}><Link to={`/blogs/${blog.id}`}>{blog.title}</Link></p>)}
+        {blogs.map(blog => <p key={blog.id} style={blogStyle}><Link to={`/blogs/${blog.id}`}>{blog.title}</Link></p>)}
       </div>
     )
 }

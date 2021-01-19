@@ -1,43 +1,41 @@
 import React from 'react'
-import Togglable from './Togglable'
-import { useDispatch } from 'react-redux'
-import { removeBlog } from '../reducers/blogReducer'
+import { useSelector } from 'react-redux'
 
-const Blog = ({ blog, updateBlogLikes }) => {
-  
-  const dispatch = useDispatch()
+const Blog = (props, { updateBlogLikes, handleLogout }) => {
+    const targetId = props.match.params.blogId
+    const loggedIn = useSelector(state => state.login.user.name)
+    const blog = useSelector(state => state.blogs.filter(blog =>    
+        blog.id === targetId
+    ))
+    console.log(blog)
+    const addLikes = (event) => {
+        event.preventDefault()
+        props.updateBlogLikes({
+          user: blog[0].user,
+          title: blog[0].title,
+          author: blog[0].author,
+          url: blog[0].url,
+          likes: blog[0].likes + 1,
+          id: blog[0].id
+        })
+      }
 
-  const blogStyle = {
-    paddingTop: 10,
-    paddingLeft: 2,
-    border: 'solid',
-    borderWidth: 1,
-    marginBottom: 5
-  }
+    if (blog.length < 1) {
+        return null
+    }
 
-  const addLikes = (event) => {
-    event.preventDefault()
-    updateBlogLikes({
-      user: blog.user,
-      title: blog.title,
-      author: blog.author,
-      url: blog.url,
-      likes: blog.likes + 1,
-      id: blog.id
-    })
-  }
-
-  return (
-    <div className="blog" style={blogStyle}>
-      <span className="title">Title: {blog.title}</span> <br />
-      <span className="author">Author: {blog.author}</span> <br />
-      <Togglable showLabel="view" hideLabel="hide">
-        <span className="url">Url: {blog.url}</span> <br />
-        <span className="likes"> Likes: {blog.likes} <button id="like" onClick={addLikes}>Like</button></span> <br />
-      </Togglable>
-      <button id="remove" onClick={() => dispatch(removeBlog(blog.id))}>Remove</button>
-    </div>
-  )
+    return (
+        <>
+        <h2>blogs</h2>
+        <h2>{blog[0].title}</h2>
+        <p><a href={`http://${blog[0].url}`}>{blog[0].url}</a></p>
+        <p>{blog[0].likes} likes <button onClick={addLikes}>like</button></p>
+        <p>added by {blog[0].author}</p>
+        <h3>Comments</h3>
+        {blog[0].comments.map(comment => {
+            return <li key={comment._id}>{comment.body}</li>})}
+        </>
+    )
 }
 
 export default Blog

@@ -17,7 +17,7 @@ import Nav from './components/Nav'
 import { clearUser } from './reducers/loginReducer'
 import { incrementLike } from './reducers/blogReducer'
 import User from './components/User'
-import BlogBeta from './components/BlogBeta'
+import BlogBeta from './components/Blog'
 
 
 const App = () => {
