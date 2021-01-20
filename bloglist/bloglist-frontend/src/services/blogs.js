@@ -43,7 +43,7 @@ const updateComments = async (newComment) => {
     headers: { Authorization: token },
   }
 
-  const response = await axios.put(`${baseUrl}/${newComment.id}/comments`, newComment, config)
+  const response = await axios.post(`${baseUrl}/${newComment.id}/comments`, newComment, config)
   return response.data
 }
 

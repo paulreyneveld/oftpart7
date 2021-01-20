@@ -27,18 +27,18 @@ const Blog = (props, { updateBlogLikes, handleLogout }) => {
     
     const addComment = (event) => {
         event.preventDefault()
-        dispatch(Comment(blog, comment))
+        dispatch(newComment(blog, comment))
         setComment('')
     }
 
     console.log(blog)
-    const conditionalComments = () => {
-        if (blog[0].comments.length > 0) {
-            blog[0].comments.map(comment => {
-                return <li key={comment._id}>{comment.body}</li>
-            })
-        }
-    }
+    // const conditionalComments = () => {
+    //     if (blog[0].comments.length > 0) {
+    //         blog[0].comments.map(comment => {
+    //             return <li key={comment._id}>{comment.body}</li>
+    //         })
+    //     }
+    // }
 
     if (blog.length < 1) {
         return null
@@ -62,7 +62,9 @@ const Blog = (props, { updateBlogLikes, handleLogout }) => {
         />
         <button type="submit" id="new-comment">Comment</button>
         </form>
-        {conditionalComments()}
+        {            blog[0].comments.map(comment => {
+                return <li key={comment._id}>{comment.body}</li>
+            })}
         </>
     )
 }
