@@ -31,7 +31,6 @@ const Blog = (props, { updateBlogLikes, handleLogout }) => {
         setComment('')
     }
 
-    console.log(blog)
     // const conditionalComments = () => {
     //     if (blog[0].comments.length > 0) {
     //         blog[0].comments.map(comment => {
@@ -62,7 +61,7 @@ const Blog = (props, { updateBlogLikes, handleLogout }) => {
         />
         <button type="submit" id="new-comment">Comment</button>
         </form>
-        {            blog[0].comments.map(comment => {
+        {blog[0].comments.map(comment => {
                 return <li key={comment._id}>{comment.body}</li>
             })}
         </>

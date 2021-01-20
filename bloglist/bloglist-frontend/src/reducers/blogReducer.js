@@ -14,6 +14,15 @@ const reducer = (state = [], action) => {
                 blog.id === action.data.blog.id 
                 ? { ...blog, likes: action.data.blog.likes}
                 : blog)
+        case 'ADD_COMMENT': 
+            console.log(action.data.newBlog)
+            console.log(action.data.newBlog.comments._id)
+            console.log(state[0].comments)
+            return state.map(blog => 
+                blog.id === action.data.newBlog.id
+                ? {...blog, comments: action.data.newBlog.comments}
+                : blog 
+            )
         default: 
             return state
     }
@@ -68,12 +77,13 @@ export const newComment = (blog, comment) => {
             id: blog[0].id,
             body: comment
         }
-        console.log(newComment.id)
         const updatedBlog = await blogService.updateComments(newComment)
         console.log(updatedBlog)
         dispatch({
             type: 'ADD_COMMENT',
-            data: comment
+            data: { 
+                newBlog: updatedBlog
+            }
         })
     }
 }
