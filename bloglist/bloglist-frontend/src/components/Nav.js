@@ -13,6 +13,8 @@ const Nav = ({ handleLogout }) => {
 
     const linkStyle = {
         paddingRight: 5
+        // textDecoration: 'none',
+        // color: 'green'
     }
 
     return (

@@ -10,6 +10,9 @@ import userReducer from './reducers/userReducer'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
+import './some.css'
+
+
 const reducer = combineReducers({
     notification: notificationReducer,
     blogs: blogReducer,

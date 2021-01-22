@@ -19,7 +19,6 @@ import { incrementLike } from './reducers/blogReducer'
 import User from './components/User'
 import BlogBeta from './components/Blog'
 
-
 const App = () => {
 
   const dispatch = useDispatch()
