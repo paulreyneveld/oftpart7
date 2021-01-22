@@ -1,14 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { newComment } from '../reducers/blogReducer'
+import Comments from '../components/Comments'
 
-const Comments = ({ blog }) => {
-    return (
-        blog.comments.map(comment => {
-            return <li key={comment._id}>{comment.body}</li>
-        })
-    )
-}
 
 const Blog = (props, { updateBlogLikes, handleLogout }) => {
 
