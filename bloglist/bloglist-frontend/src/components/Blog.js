@@ -2,6 +2,14 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { newComment } from '../reducers/blogReducer'
 
+const Comments = ({ blog }) => {
+    return (
+        blog.comments.map(comment => {
+            return <li key={comment._id}>{comment.body}</li>
+        })
+    )
+}
+
 const Blog = (props, { updateBlogLikes, handleLogout }) => {
 
     const [comment, setComment] = useState('')
@@ -12,6 +20,8 @@ const Blog = (props, { updateBlogLikes, handleLogout }) => {
     const blog = useSelector(state => state.blogs.filter(blog =>    
         blog.id === targetId
     ))
+
+    const individualBlog = blog[0]
 
     const addLikes = (event) => {
         event.preventDefault()
@@ -31,15 +41,7 @@ const Blog = (props, { updateBlogLikes, handleLogout }) => {
         setComment('')
     }
 
-    // const conditionalComments = () => {
-    //     if (blog[0].comments.length > 0) {
-    //         blog[0].comments.map(comment => {
-    //             return <li key={comment._id}>{comment.body}</li>
-    //         })
-    //     }
-    // }
-
-    if (blog.length < 1) {
+    if (!individualBlog) {
         return null
     }
 
@@ -61,9 +63,7 @@ const Blog = (props, { updateBlogLikes, handleLogout }) => {
         />
         <button type="submit" id="new-comment">Comment</button>
         </form>
-        {blog[0].comments.map(comment => {
-                return <li key={comment._id}>{comment.body}</li>
-            })}
+        {individualBlog.comments && <Comments blog={individualBlog} />}
         </>
     )
 }
